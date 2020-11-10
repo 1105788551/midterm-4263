@@ -28,13 +28,14 @@ class MainActivity : AppCompatActivity() {
         val url = "https://phrasal-bond-292319.uc.r.appspot.com/"
 
         // OU calendar returns a Json Array, if your website returns a Json Object then use JsonObjectRequest
-        val stringRequest = JsonObjectRequest(Request.Method.GET, url, null,
+        val stringRequest = JsonObjectRequest(Request.Method.POST, url, null,
                 Response.Listener<JSONObject> { response ->
                     val event = response
                     // eventTitle is the id for the textbox in activity_main.xml
                     eventTitle.text = "Event title is : ${event.toString()}"
                 },
-                Response.ErrorListener { eventTitle.text = "That didn't work" })
+                Response.ErrorListener { error -> eventTitle.text = error.message })
+
 
         // button is the id for the button in activity_main.xml
         button.setOnClickListener {
